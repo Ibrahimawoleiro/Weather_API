@@ -4,6 +4,7 @@
   padding: 0;
   color: white;
   text-align: center;
+  
 }
 
 .App{
@@ -17,21 +18,22 @@
   padding-right: 40px;
   justify-content: space-between;
   overflow: hidden;
+  padding-bottom: 20px;
 }
 
 .Right{
   width: 75%;
-  border: 3px solid green;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 4fr;
   column-gap: 40px;
   row-gap: 5px;
+  
 }
 
 .Left{
   width: 20%;
-  border: 3px solid red;
+
   background-color: rgba(255, 255, 255, 0.09);
 }
 
@@ -41,6 +43,7 @@
   margin-top: 40px;
   background-color: rgba(255, 255, 255, 0.09);
   padding:15px 0 ;
+  
 }
 
 .first{
@@ -48,7 +51,6 @@
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
-  border:3px solid yellow;
 }
 
 .second{
@@ -56,7 +58,6 @@
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  border:3px solid green;
 }
 
 .third{
@@ -64,7 +65,6 @@
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
-  border:3px solid blue;
 }
 
 .fourth{
@@ -72,7 +72,7 @@
   grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 3;
-  border:3px solid white;
+  overflow: scroll;
 }
 
 .Left h1{
@@ -89,10 +89,29 @@
   justify-content: space-around;
   padding-top: 10px;
 }
+
 #starter,#filtering{
   background-color: grey;
-  margin-left: 2px;
+  margin: 10px;
 }
+
 .Tablee{
   width: 100%;
+  height: 100%;
+  color: black !important;
+  
 }
+
+table{
+  height: 100%;
+}
+
+#searcher,#filter,#filterdate{
+  color: grey;
+}
+
+span{
+  padding-top: 20px;
+  color: red;
+}
+

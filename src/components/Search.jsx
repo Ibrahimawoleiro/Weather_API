@@ -1,25 +1,66 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 function Search(props) {
-    const [count, setCount] = useState(0)
+    const [curr, setCurr] = useState("")
+    const [dateFiltering,setdateFiltering] = useState("")
 
-    const start = () =>{
+    const start = () => {
+        props.getWeather(props.input.current,"");
+    }
 
+    let change = event => {
+        setCurr(event.target.value)
+        props.input.current = curr;
+    }
+
+    let datefilter = (event)=>{
+        setdateFiltering(event.target.value)
+        props.datefilter.current = dateFiltering
+        console.log(dateFiltering)
+    }
+
+    useEffect(() => {
+        props.input.current = curr
+        props.datefilter.current = dateFiltering
+        console.log(dateFiltering)
+       
+    })
+
+    const filter = () => {
+        let filterBox = document.getElementById("filter");
+        let filterValue = filterBox.options[filterBox.selectedIndex].value;
+        props.filter.current = filterValue
+        console.log(dateFiltering)
+        props.getWeather(props.input.current,props.datefilter.current);
     }
 
     return (
         <div className='Search'>
             <div>
                 <label htmlFor="searcher">Search city:  </label>
-                <input type="text" name="search" id="searcher" placeholder='Search by city,State' />
-                <button id='starter' onClick={props.getWeather}>Search</button>
+                <input type="text" onChange={change} name="search" id="searcher" value={curr} />
+                <button id='starter' onClick={start}>Search</button>
             </div>
-            
+
             <div>
+                
                 <label htmlFor="filter">Filter by temperature:  </label>
-                <input type="text" name="filter" id="filter" placeholder='Filter by temperature'/>
-                <button id='filtering' onClick={start}>Filter</button>
+                <select name="filter" id="filter">
+                    <option value="">No filter</option>
+                    <option value="5">5 degrees downward</option>
+                    <option value="10">10 degrees downward</option>
+                    <option value="15">15 degrees downward</option>
+                    <option value="20">20 degrees downward</option>
+                    <option value="25">25 degrees downward</option>
+                    <option value="30">30 degrees downward</option>
+                    <option value="35">35 degrees downward</option>
+                    <option value="40">40 degrees downward</option>
+                    <option value="45">45 degrees downward</option>
+                </select>
+                <button id='filtering' onClick={filter}>Filter</button>
+                <label htmlFor="filterdate">Filter by date: </label>
+                <input type="text" onChange={datefilter} name="filter" id="filterdate" value={dateFiltering} />
             </div>
 
         </div>

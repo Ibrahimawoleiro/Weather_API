@@ -1,29 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 function Tablee(props) {
-    const [count, setCount] = useState(0)
-    let holder = []
+    const [count, setCount] = useState(0);
+    const holder = useRef([]);
+    const ans = useRef(1);
 
-    props.Data ?
-        props.Data.data.forEach((val) => {
-            holder.push({
-                date: val.datetime,
-                temp: val.temp,
-                cloud: val.cloud,
-                pres: val.pres
-            })
-        }): 0
-        
+
+
     return (
         <div className='Tablee'>
-            <table border={10} style={{ width: "100%", marginTop: "20px" }}>
+            <table style={{ width: "100%", marginTop: "20px" }}>
                 <thead>
                     <tr>
                         <th>
-                            Date
+                            Date(Year/Month/Day)
                         </th>
                         <th>
-                            Temperature
+                            Temperature(Celsius)
                         </th>
                         <th>
                             Cloud
@@ -34,41 +27,50 @@ function Tablee(props) {
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                    </tr>
-
                     {
-                        holder.map((val) => {
-                            <tr>
-                                <th>
-                                    {val.datetime}
-                                </th>
-                                <th>
-                                    {val.temp}
-                                </th>
-                                <th>
-                                    {val.cloud}
-                                </th>
-                                <th>
-                                    {val.pres}
-                                </th>
-                            </tr>
-                        })
+                        props.Data ?
+
+
+                            props.Data.map((obj, index) => {
+                                if (props.filter.current) {
+                                    if (obj.temp < props.filter.current) {
+                                        return <tr key={ans.current += 1}>
+                                            <th>
+                                                {obj.datetime}
+                                            </th>
+                                            <th>
+                                                {obj.temp}
+                                            </th>
+                                            <th>
+                                                {obj.clouds}
+                                            </th>
+                                            <th>
+                                                {obj.pres}
+                                            </th>
+                                        </tr>
+                                    }
+                                } else {
+                                    return <tr key={ans.current += 1}>
+                                        <th>
+                                            {obj.datetime}
+                                        </th>
+                                        <th>
+                                            {obj.temp}
+                                        </th>
+                                        <th>
+                                            {obj.clouds}
+                                        </th>
+                                        <th>
+                                            {obj.pres}
+                                        </th>
+                                    </tr>
+                                }
+
+                            }) : <tr></tr>
 
                     }
+
+
                 </tbody>
 
 
